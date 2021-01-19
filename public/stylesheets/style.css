@@ -7,3 +7,25 @@
 body{
   background-color: white;
 }
+
+#content-column{
+  background-color: black;
+}
+
+#image-column{
+  background-color: yellow;
+}
+
+#content{
+  color: white;
+  padding-top: 35%;
+  padding-bottom: 35%;
+}
+
+#footer{
+  padding-top: 7%;
+  padding-bottom: 7%;
+  text-align: center;
+  display: block;
+}
+
