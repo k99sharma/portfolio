@@ -23,9 +23,13 @@ body{
 }
 
 #footer{
-  padding-top: 7%;
-  padding-bottom: 7%;
   text-align: center;
   display: block;
+  padding-top: 10%;
+}
+
+#alert-form{
+  padding-top: 10%;
+  padding-bottom: 10%;
 }
 
