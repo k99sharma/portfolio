@@ -11,5 +11,13 @@ router.get('/', function(req, res) {
 });
 
 
+// GET about page
+router.get('/about', (req, res)=>{
+  res.locals.current_page = "about";
+
+  res.render('about.ejs');
+  res.send(200);
+});
+
 
 module.exports = router;
