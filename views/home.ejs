@@ -1,88 +1,8 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- header  -->
+<%- include('partials/header.ejs') %>
 
-    <link href="/stylesheets/all.min.css" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
-
-    <title>Kalash Sharma</title>
-  </head>
-
-  <body>
-
-    <!-- navbar container -->
-    <section class="container-fluid my-5">
-      <!-- navbar -->
-      <nav class="navbar navbar-expand-md navbar-light" style="background-color: white;">
-        <div class="container-fluid">
-          <!-- brand -->
-          <a class="navbar-brand mx-md-4" href="#">kalash sharma</a>
-
-          <!-- responsive button -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <!-- responsive button ends here -->
-
-          <!-- navbar contents -->
-          <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
-            <!-- website main nav links -->
-            <ul class="navbar-nav mx-md-5">
-              <li class="nav-item mx-md-2">
-                  <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item mx-md-2">
-                  <a class="nav-link" href="#">Projects</a>
-              </li>
-              <li class="nav-item mx-md-2">
-                  <a class="nav-link" href="#">Blog</a>
-              </li>
-              <li class="nav-item mx-md-2">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item mx-md-2">
-               <a class="nav-link" href="#">Contact</a>
-              </li>
-            </ul><!-- website main nav links ends here -->
-
-            <!-- nav social follow links -->
-            <ul class="navbar-nav mx-md-5 d-flex flex-row justify-content-center">
-              <li class="nav-item mx-1">
-                  <a class="nav-link" href="#">
-                    <i class="fab fa-github"></i>
-                  </a>
-              </li>
-              <li class="nav-item mx-1">
-                  <a class="nav-link" href="#">
-                    <i class="fab fa-instagram"></i>
-                  </a>
-              </li>
-              <li class="nav-item mx-1">
-                <a class="nav-link" href="#">
-                  <i class="fab fa-linkedin"></i>
-                 </a>
-              </li>
-              <li class="nav-item mx-1">
-               <a class="nav-link" href="#">
-                <i class="fab fa-twitter"></i>
-               </a>
-              </li>
-            </ul><!-- nav social follow links here ends here -->
-
-          </div><!-- navbar contents ends here -->
-
-        </div>
-
-      </nav>
-      <!-- navbar ended here -->
-    </section>
-    <!-- navbar contents ends here -->
+<!-- navbar -->
+<%- include('partials/navbar.ejs') %>
 
 
     <!-- main content -->
@@ -107,48 +27,8 @@
     </section><!-- main content ends here -->
 
 
-    <!-- footer -->
-    <section class="container-fluid" id="footer">
-
-      <!-- blog alert form container -->
-      <div class="container" id="alert-form">
-        <h3>Sign up for my newsletter</h3>
-        <br>
-        <p>Join my mailing list to get news and updates</p>
-
-        <!-- form -->
-        <form class="row g-3 align-items-center justify-content-center" action="#">
-          <div class="col-auto">
-            <label for="inline-email" class="visually-hidden">Email Address</label>
-            <input type="email" class="form-control form-control-lg" id="inline-email" name="email" placeholder="Email Address">
-          </div>
-  
-          <div class="col-auto">
-            <button class="btn btn-lg" type="submit" style="background-color: black; color: white;">Submit</button>
-          </div>
-        </form>
-        <!-- form ends here -->
-      </div>
-      <!-- blog alert form container ends here -->
-      
-      <!-- follow me links container -->
-      <div class="container mb-5" id="follow-me-container">
-        <div class="d-flex flex-row justify-content-center mb-3">
-          <a class="mx-2" href="#"><i class="fab fa-github"></i></a>
-          <a class="mx-2" href="#"><i class="fab fa-instagram"></i></a>
-          <a class="mx-2" href="#"><i class="fab fa-linkedin"></i></a>
-          <a class="mx-2" href="#"><i class="fab fa-twitter"></i></a>
-        </div>
-
-        <p>Kalash Sharma</p>
-      </div>
-      <!-- follow me container ends here -->
-
-    </section>
-    <!-- footer ends here -->
+<!-- footer -->
+<%- include('partials/footer.ejs') %>
+<!-- footer ends here -->
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    
-  </body>
-</html>
