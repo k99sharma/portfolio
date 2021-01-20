@@ -19,5 +19,14 @@ router.get('/about', (req, res)=>{
   res.send(200);
 });
 
+// GET contact page
+router.get('/contact', (req, res)=>{
+  res.locals.current_page = "contact";
+
+  res.render('contact.ejs');
+  res.send(200);
+});
+
+
 
 module.exports = router;
