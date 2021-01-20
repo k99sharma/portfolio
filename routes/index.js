@@ -2,9 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 
-
-/* GET home page. */
+// GET homepage
 router.get('/', function(req, res) {
+  res.locals.current_page = "home";
+
   res.render('home.ejs');
   res.send(200);
 });
