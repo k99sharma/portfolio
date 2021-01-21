@@ -1,35 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const mailingList = require('../models/mailingList');
+const contact = require('../models/contactme');
 
+const sendEmail = require('../middlewares/sendEmail');
+const addEmail = require('../middlewares/addEmail');
 
 /* POST newsletter form ====> Mailing List */
-
-// function to add email in mailing list
-const addEmail = async (email, res)=>{
-    // first check if it is already in available in list
-    const available = await mailingList.findOne({emailAddress : email});
-    if(available){
-        console.log('Email is already available.');
-        return 1;
-    }
-
-    // if email is not available 
-    else{
-        const updatedMailingList = new mailingList({emailAddress : email});
-        await updatedMailingList.save()
-            .then(()=>{
-                console.log('Email is successfully added to mailing list.');
-                return 1;
-            })
-            .catch(err => {
-                console.log('Email cannot be added to the mailing list at the moment.');
-                console.log(err);
-                return 0;
-            })
-    }
-}
 
 router.post('/mailingList', async (req, res) => {
     const {email} = req.body;
@@ -42,7 +19,43 @@ router.post('/mailingList', async (req, res) => {
 });
 
 
+/* POST contact form ====> Message me by filling the form */
 
+router.post('/contact', async (req, res)=>{
+    const { firstname, lastname, email, message } = req.body;
+
+    // new message 
+    const newMessageEntry = new contact({
+        firstName : firstname,
+        lastName : lastname,
+        senderEmail : email,
+        message : message
+    });
+
+    await newMessageEntry.save()
+        .then(()=>{
+            console.log('Message entry saved successfully !');
+        })
+        .catch(err => {
+            console.log('Message cannot be saved !');
+            console.log(err);
+        })
+
+    const myEmail = 'kalash.strt@gmail.com';
+    const mail_type = 1;
+
+    // send email function calling
+    sendEmail(`${firstname} ${lastname}`, email, myEmail, message, mail_type)
+        .then(()=>{
+            console.log('Email Sent!');
+        })
+        .catch(err => {
+            console.log('Email cannot be sent !');
+            console.log(err);
+        })
+
+    res.redirect('/ghost_32/');
+});
 
 
 module.exports = router;
