@@ -41,7 +41,7 @@ router.post('/contact', async (req, res)=>{
             console.log(err);
         })
 
-    const myEmail = 'kalash.strt@gmail.com';
+    const myEmail = process.env.MYEMAIL;
     const mail_type = 1;
 
     // send email function calling

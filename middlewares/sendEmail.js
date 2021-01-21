@@ -24,14 +24,15 @@ const sendEmail = async (name, from_email, to_email, message, mail_type) => {
 
     // creating a transporter 
     const transporter = nodemailer.createTransport({
+        pool: true,
         host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
+        port: 465,
+        secure: true,
         service: 'gmail',
         auth: {
             // need to change this 
-            user: 'kalash.ghost32@gmail.com',
-            pass: 'darthVader@99'
+            user: process.env.NODEMAILER_EMAIL,
+            pass: process.env.NODEMAILER_PASSWORD
         }
     });
 
@@ -42,6 +43,8 @@ const sendEmail = async (name, from_email, to_email, message, mail_type) => {
         subject: 'New Portfolio Message',
         html: setMailBody
     };
+
+    console.log(mailOptions);
 
     // sending email
     await transporter.sendMail(mailOptions, (error, info)=>{
