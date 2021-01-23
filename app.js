@@ -8,6 +8,8 @@ require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var formRouter = require('./routes/forms_submission');
+const adminRouter = require('./routes/adminRouter');
+const projectsRouter = require('./routes/projectsRouter');
 
 var app = express();
 
@@ -38,6 +40,8 @@ mongoose.connect(dbURI, dbOptions)
 // routes
 app.use('/ghost_32', indexRouter);
 app.use('/ghost_32', formRouter);
+app.use('/ghost_32/admin', adminRouter);
+app.use('/ghost_32/admin/projects', projectsRouter);
 
 
 // catch 404 and forward to error handler

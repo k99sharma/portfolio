@@ -26,5 +26,12 @@ router.get('/contact', (req, res)=>{
 });
 
 
+// GET projects page
+router.get('/projects', (req, res)=>{
+  res.locals.current_page = "projects";
+
+  res.render('projects.ejs');
+});
+
 
 module.exports = router;

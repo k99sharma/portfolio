@@ -15,8 +15,9 @@
     <link href="/stylesheets/nf.css" rel="stylesheet" type="text/css">
 
     <!-- current page stylesheet -->
-    <link href="/stylesheets/<%= current_page %>.css" rel="stylesheet" type="text/css">
-    
+    <% if(current_page){ %>
+      <link href="/stylesheets/<%= current_page %>.css" rel="stylesheet" type="text/css">
+    <% } %>
 
     <title>Kalash Sharma</title>
   </head>
