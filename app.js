@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const dbURI = 'mongodb://localhost: 270181/portfolio';
 const dbOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 mongoose.connect(dbURI, dbOptions)
-  .catch(err => {
+  .catch((err) => {
     console.log('Database connection failed !');
     next(err);
   })

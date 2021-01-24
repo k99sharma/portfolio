@@ -51,25 +51,25 @@
 
                               <div class="modal-body" id="projectModalBody">
                                 <!-- new project form-->
-                                <form action="#">
+                                <form action="/ghost_32/admin/newProject" method="POST" autocomplete="off">
                                   <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name">
-                                    <label for="projectName">Project Name</label>
+                                    <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name" required>
+                                    <label for="projectName">Project Name<span class="redLabel">*</span></label>
                                   </div>
 
                                   <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Image Link">
-                                    <label for="imageLink">Image Link</label>
+                                    <input type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Image Link" required>
+                                    <label for="imageLink">Image Link<span class="redLabel">*</span></label>
                                   </div>
 
                                   <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="videoLink" name="videoLink" placeholder="Video Link">
-                                    <label for="videoLink">Video Link</label>
+                                    <input type="text" class="form-control" id="videoLink" name="videoLink" placeholder="Video Link" required>
+                                    <label for="videoLink">Video Link<span class="redLabel">*</span></label>
                                   </div>
 
                                   <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="githubLink" name="githubLink" placeholder="Github Link">
-                                    <label for="githubLink">Github Link</label>
+                                    <input type="text" class="form-control" id="githubLink" name="githubLink" placeholder="Github Link" required>
+                                    <label for="githubLink">Github Link<span class="redLabel">*</span></label>
                                   </div>
 
                                   <div class="form-floating mb-3">
@@ -78,8 +78,8 @@
                                   </div>
 
                                   <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="adminPassword" name="adminPassword" placeholder="Admin Password">
-                                    <label for="adminPassword">Admin Password</label>
+                                    <input type="password" class="form-control" id="adminPassword" name="adminPassword" placeholder="Admin Password" required>
+                                    <label for="adminPassword">Admin Password<span class="redLabel">*</span></label>
                                   </div>
     
                                   <div class="modal-footer">
@@ -97,7 +97,7 @@
                       <!-- new projects modal entry ends here -->
 
                       <br /><br />
-                      <a class="btn btn-primary" href="#">Project Collection</a>
+                      <a class="btn btn-primary" href="/ghost_32/admin/projectCollection">Project Collection</a>
                     </div>
                   </div>
                 </div>
@@ -106,9 +106,9 @@
                 <div class="tab-pane fade" id="blogs" role="tabpanel" aria-labelledby="blogs-tab">
                   <div class="card">
                     <div class="card-body">
-                      <a class="btn btn-success btn-lg" href="">New Blog</a>
+                      <a class="btn btn-success btn-lg" href="#">New Blog</a>
                       <br /><br />
-                      <a class="btn btn-primary btn-lg" href="">Blog Collections</a>
+                      <a class="btn btn-primary btn-lg" href="#">Blog Collections</a>
                     </div>
                   </div>
                 </div>
