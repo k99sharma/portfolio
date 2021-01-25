@@ -4,10 +4,57 @@
 <!-- navbar -->
 <%- include('partials/navbar.ejs') %>
 
+
 <!-- main content -->
 <section class="container-fluid" id="projects-section">
-    
+    <!-- all projects card -->
+    <div class="row">
+        <% for(let project of allProjects){ %>
+            <div class="col-12 col-md-6 p-4">
+                <!-- project card -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link active" id="project-details-tab" data-bs-toggle="tab" href="#project-details-<%= project._id %>" role="tab" aria-controls="project-details" aria-selected="true">Project De</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <a class="nav-link" id="project-video-tab" data-bs-toggle="tab" href="#project-video-<%= project._id %>" role="tab" aria-controls="profile" aria-selected="false">Video Clip</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="projectContent">
+                    <div class="tab-pane fade show active" id="project-details-<%= project._id %>" role="tabpanel" aria-labelledby="project-details-tab">
+                        <div class="card text-center" id="project-details-card-<%= project._id %>">
+                            <img src="<%= project.imageLink %>" class="card-img-top" alt="project image">
+                                    
+                            <div class="card-body">
+                                <small class="text-muted"><%= project.createdOn %></small>
+                                <br /><br />
+                                <h5 class="card-text"><%= project.projectName %></h5>
+                            </div>
+                
+                            <div class="card-footer">
+                                <a href="<%= project.githubLink %>" class="btn btn-primary m-2"><i class="fab fa-github"></i></a>
+
+                                <a href="<%= project.hostingLink %>" class="btn btn-success m-2"><i class="fas fa-rocket"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="project-video-<%= project._id %>" role="tabpanel" aria-labelledby="project-video">
+                        <div class="card" id="project-video-card-<%= project._id %>">
+                            <h1>Video</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- projects ends here -->
+            </div>
+        <% } %>
+    </div>
 </section>
+
+
+<!-- newsletter -->
+<%- include('partials/newsletter.ejs') %>
 
 <!-- footer -->
 <%- include('partials/footer.ejs') %>
