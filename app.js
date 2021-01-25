@@ -4,12 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var methodOverride = require('method-override');
+
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var formRouter = require('./routes/forms_submission');
 const adminRouter = require('./routes/adminRouter');
-const projectsRouter = require('./routes/projectsRouter');
 
 var app = express();
 
@@ -22,12 +23,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 // database connection setup
 const dbURI = 'mongodb://localhost: 270181/portfolio';
 const dbOptions = {useNewUrlParser: true, useUnifiedTopology: true};
 mongoose.connect(dbURI, dbOptions)
-  .catch(err => {
+  .catch((err) => {
     console.log('Database connection failed !');
     next(err);
   })
@@ -41,7 +43,7 @@ mongoose.connect(dbURI, dbOptions)
 app.use('/ghost_32', indexRouter);
 app.use('/ghost_32', formRouter);
 app.use('/ghost_32/admin', adminRouter);
-app.use('/ghost_32/admin/projects', projectsRouter);
+
 
 
 // catch 404 and forward to error handler
