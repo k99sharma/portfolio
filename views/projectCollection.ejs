@@ -9,121 +9,99 @@
     <a href="/ghost_32/admin/" class="btn btn-primary my-2 mx-5">Admin</a>
 
     <!-- all projects card -->
-    <div class="row">
+    <div class="row mt-2" id="project-card-collection">
         <% for(let project of allProjects){ %>
-            <div class="col-12 col-md-6 p-5">
+            <div class="col-12 col-md-4 p-4">
                 <!-- project card -->
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                      <a class="nav-link active" id="project-details-tab" data-bs-toggle="tab" href="#project-details-<%= project._id %>" role="tab" aria-controls="project-details" aria-selected="true">Project De</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <a class="nav-link" id="project-video-tab" data-bs-toggle="tab" href="#project-video-<%= project._id %>" role="tab" aria-controls="profile" aria-selected="false">Video Clip</a>
-                    </li>
-                </ul>
+                <div class="card">
+                    <div class="card text-center" id="project-details-card-<%= project._id %>">
+                        <img src="<%= project.imageLink %>" class="card-img-top" alt="project image">
+                        
+                        <div class="card-body">
+                        <small class="text-muted"><%= project.createdOn %></small>
+                        <br /><br />
+                        <h5 class="card-text"><%= project.projectName %></h5>
 
-                        <div class="tab-content" id="projectContent">
-                            <div class="tab-pane fade show active" id="project-details-<%= project._id %>" role="tabpanel" aria-labelledby="project-details-tab">
-                                <div class="card text-center" id="project-details-card-<%= project._id %>">
-                                    <img src="<%= project.imageLink %>" class="card-img-top" alt="project image">
-                                    
-                                    <div class="card-body">
-                                    <small class="text-muted"><%= project.createdOn %></small>
-                                    <br /><br />
-                                    <h5 class="card-text"><%= project.projectName %></h5>
-                                    </div>
-                
-                                    <div class="card-footer">
-                                        <div class="row p-2">
-                                            <div class="col-auto col-md-6">
-                                                <a href="<%= project.githubLink %>" class="btn btn-primary">Github Link</a>
-                                            </div>
+                        <div class="row p-2">
+                            <div class="col-auto col-md-6">
+                                <a href="<%= project.githubLink %>" class="btn btn-primary">Github Link</a>
+                            </div>
 
-                                            <div class="col-auto col-md-6">
-                                                <a href="<%= project.hostingLink %>" class="btn btn-success">Hosting Link</a>
-                                            </div>
-                                        </div>
-
-                                        <div class="row p-2">
-                                            <div class="col-auto col-md-6">
-                                                <!-- edit modal -->
-                            
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#project-modal">
-                                                    Edit Project
-                                                </button>
-                
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="project-modal" tabindex="-1" aria-labelledby="project-modal" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h5 class="modal-title" id="projectModalLabel">Edit Project Entry</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                        
-                                                        <div class="modal-body" id="projectModalBody">
-                                                        <!-- new project form-->
-                                                        <form action="/ghost_32/admin/projectCollection/<%= project._id %>?_method=PUT" method="POST" autocomplete="off">
-                                                            <div class="form-floating mb-3">
-                                                            <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name" value="<%= project.projectName %>" required>
-                                                            <label for="projectName">Project Name<span class="redLabel">*</span></label>
-                                                            </div>
-                        
-                                                            <div class="form-floating mb-3">
-                                                            <input type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Image Link" value="<%= project.imageLink %>" required>
-                                                            <label for="imageLink">Image Link<span class="redLabel">*</span></label>
-                                                            </div>
-                        
-                                                            <div class="form-floating mb-3">
-                                                            <input type="text" class="form-control" id="videoLink" name="videoLink" placeholder="Video Link" value="<%= project.videoLink %>" required>
-                                                            <label for="videoLink">Video Link<span class="redLabel">*</span></label>
-                                                            </div>
-                        
-                                                            <div class="form-floating mb-3">
-                                                            <input type="text" class="form-control" id="githubLink" name="githubLink" placeholder="Github Link" value="<%= project.githubLink %>" required>
-                                                            <label for="githubLink">Github Link<span class="redLabel">*</span></label>
-                                                            </div>
-                        
-                                                            <div class="form-floating mb-3">
-                                                            <input type="text" class="form-control" id="hostingLink" name="hostingLink" placeholder="Hosting Link" value="<%= project.hostingLink %>">
-                                                            <label for="hostingLink">Hosting Link</label>
-                                                            </div>
-                        
-                                                            <div class="form-floating mb-3">
-                                                            <input type="password" class="form-control" id="adminPassword" name="adminPassword" placeholder="Admin Password" required>
-                                                            <label for="adminPassword">Admin Password<span class="redLabel">*</span></label>
-                                                            </div>
-                            
-                                                            <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-success">Edit</button>
-                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </form>
-                                                        <!-- edit project form ends here -->
-                                                        </div>   
-                                                    </div>
-                                                    </div>
-                                                    <!-- modal ends here -->
-                                                </div>
-                                                <!-- edit ends here -->
-                                            </div>
-
-                                            <div class="col-auto col-md-6">
-                                                <!-- delete project -->
-                                                <form action="/ghost_32/admin/projectCollection/<%= project._id %>?_method=DELETE" method="POST">
-                                                    <button class="btn btn-danger">Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>                                
+                            <div class="col-auto col-md-6">
+                                <a href="<%= project.hostingLink %>" class="btn btn-success">Hosting Link</a>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="tab-pane fade" id="project-video-<%= project._id %>" role="tabpanel" aria-labelledby="project-video-<%= project._id %>">
-                        <div class="card" id="project-video-card-<%= project._id %>">
-                            <h1>Video</h1>
+                        <div class="row p-2">
+                            <div class="col-auto col-md-6">
+                                <!-- edit modal -->
+            
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#project-modal">
+                                    Edit Project
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="project-modal" tabindex="-1" aria-labelledby="project-modal" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="projectModalLabel">Edit Project Entry</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+        
+                                        <div class="modal-body" id="projectModalBody">
+                                            <!-- new project form-->
+                                            <form action="/ghost_32/admin/projectCollection/<%= project._id %>?_method=PUT" method="POST" autocomplete="off">
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name" value="<%= project.projectName %>" required>
+                                                    <label for="projectName">Project Name<span class="redLabel">*</span></label>
+                                                </div>
+            
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Image Link" value="<%= project.imageLink %>" required>
+                                                    <label for="imageLink">Image Link<span class="redLabel">*</span></label>
+                                                </div>
+            
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="githubLink" name="githubLink" placeholder="Github Link" value="<%= project.githubLink %>" required>
+                                                    <label for="githubLink">Github Link<span class="redLabel">*</span></label>
+                                                </div>
+            
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="hostingLink" name="hostingLink" placeholder="Hosting Link" value="<%= project.hostingLink %>">
+                                                    <label for="hostingLink">Hosting Link</label>
+                                                </div>
+            
+                                                <div class="form-floating mb-3">
+                                                    <input type="password" class="form-control" id="adminPassword" name="adminPassword" placeholder="Admin Password" required>
+                                                    <label for="adminPassword">Admin Password<span class="redLabel">*</span></label>
+                                                </div>
+                
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success">Edit</button>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </form>
+                                            <!-- edit project form ends here -->
+                                        </div>   
+                                    </div>
+                                </div>
+                                <!-- modal ends here -->
+                                </div>
+                                <!-- edit ends here -->
+                            </div>
+
+                            <div class="col-auto col-md-6">
+                                <!-- delete project -->
+                                <form action="/ghost_32/admin/projectCollection/<%= project._id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+
                         </div>
+    
+                       </div>
                     </div>
                 </div>
                 <!-- projects ends here -->

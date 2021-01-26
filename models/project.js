@@ -12,10 +12,6 @@ const projectSchema = new Schema({
         type: String,
         required: true
     },
-    videoLink : {
-        type: String,
-        required: true
-    },
     githubLink: {
         type: String,
         required: true
@@ -28,6 +24,7 @@ const projectSchema = new Schema({
 
 // adding plugin
 projectSchema.plugin(creationInfo);
+
 
 const Project = mongoose.model('Project', projectSchema);
 

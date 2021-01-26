@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 
 // GET projects page
 router.get('/projects', async (req, res)=>{
-  res.locals.current_page = 'projects';
+  res.locals.current_page = 'project';
 
   const allProjects = await Project.find({});
  

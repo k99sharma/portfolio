@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const router = express.Router();
 
 const Project = require('../models/project');
@@ -75,7 +76,8 @@ router.put('/projectCollection/:id', async(req, res)=>{
             imageLink : imageLink,
             videoLink : videoLink,
             githubLink : githubLink,
-            hostingLink : hostingLink 
+            hostingLink : hostingLink,
+            modifiedOn: Date.now()
         })
         .then(()=>{
             console.log('Project Edited successfully !');
@@ -109,6 +111,8 @@ router.delete('/projectCollection/:id', async (req, res)=>{
             res.redirect('/ghost_32/admin/projectCollection');
         })
 });
+
+
 
 
 module.exports = router;
