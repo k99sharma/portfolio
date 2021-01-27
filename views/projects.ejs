@@ -6,28 +6,62 @@
 
 
 <!-- main content -->
+<div class="container text-center" id="project-intro">
+    <h5>Project</h5>
+    <br />
+    <h1>Project Intro</h1>
+</div>
+
 <section class="container-fluid" id="projects-section">
-    <!-- all projects card -->
+    <!-- all projects modals -->
     <div class="row" id="project-card-collection">
         <% for(let project of allProjects){ %>
             <div class="col-12 col-md-4 p-4">
-                <!-- project card -->
-                <div class="card">
-                    <div class="card text-center" id="project-details-card-<%= project._id %>">
-                        <img src="<%= project.imageLink %>" class="card-img-top" alt="project image">
-                                
-                        <div class="card-body">
-                            <small class="text-muted"><%= project.createdOn %> <%= project.creationTime %></small>
-                            <br /><br />
-        
-                            <h5 class="card-text"><%= project.projectName %></h5>
-    
-                            <a href="<%= project.githubLink %>" class="btn btn-primary m-2" target="_blank"><i class="fab fa-github"></i></a>
-                            <a href="<%= project.hostingLink %>" class="btn btn-success m-2" target="_blank"><i class="fas fa-rocket"></i></a>
+                
+                <button type="button" data-bs-toggle="modal" data-bs-target="#modal-<%= project._id %>">
+                    <img src="<%= project.imageLink %>" class="img-fluid" alt="<%= project.projectName %> Image">
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modal-<%= project._id %>" tabindex="-1" aria-labelledby="modal-<%= project.projectName %>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content row">
+                            <div class="modal-header text-white bg-dark">
+                                <h5 class="modal-title"><%= project.projectName %></h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body text-white bg-dark">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <img src="<%= project.imageLink %>" class="img-fluid" alt="<%= project.projectName %> Image"> 
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="container mb-4">
+                                            <%= project.projectDescription %>
+                                        </div>
+
+                                        <div class="container">
+                                            <p>Technology Stack</p>
+                                            <% for(let tech of project.projectMadeBy){ %>
+                                                <img src="/images/tech/<%= tech %>" class="img-fluid mx-1" col="20px" row="20px" alt="<%= tech %> Image">
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer text-white bg-dark">
+                                <a type="button" href="<%= project.githubLink %>" class="btn btn-success"><i class="fab fa-github"></i></a>
+                                <% if(project.hostingLink){ %>
+                                    <a type="button" href="<%= project.hostingLink %>" class="btn btn-primary"><i class="fas fa-rocket"></i></a>
+                                <% } %>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- projects ends here -->
+                <!-- project modal ends here -->
             </div>
         <% } %>
     </div>

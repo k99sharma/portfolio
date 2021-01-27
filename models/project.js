@@ -8,6 +8,14 @@ const projectSchema = new Schema({
         type: String, 
         required: true
     },
+    projectDescription: {
+        type: String,
+        required: true
+    },
+    projectMadeBy: {
+        type: Array,
+        required: true
+    },
     imageLink: {
         type: String,
         required: true
