@@ -16,7 +16,7 @@ router.get('/', (req, res)=>{
 
 // POST new project entry
 router.post('/newProject', async (req, res)=>{
-    const {projectName, projectDescription, projectMadeBy, imageLink, videoLink, githubLink, hostingLink=undefined, adminPassword} = req.body;
+    const {projectName, projectDescription, projectMadeBy, imageLink, thumbnailLink, videoLink, githubLink, hostingLink=undefined, adminPassword} = req.body;
 
     projectMadeBy_Array = await findFrameWorks(projectMadeBy);
 
@@ -25,6 +25,7 @@ router.post('/newProject', async (req, res)=>{
             projectName : projectName,
             projectDescription : projectDescription,
             projectMadeBy : projectMadeBy_Array,
+            thumbnailLink : thumbnailLink,
             imageLink : imageLink,
             videoLink : videoLink,
             githubLink : githubLink,
@@ -73,7 +74,7 @@ router.get('/projectCollection', async (req, res)=>{
 // Edit Project
 router.put('/projectCollection/:id', async(req, res)=>{
     const { id } = req.params;
-    const {projectName, projectDescription, projectMadeBy, imageLink, videoLink, githubLink, hostingLink=undefined, adminPassword} = req.body;
+    const {projectName, projectDescription, projectMadeBy, imageLink, thumbnailLink, videoLink, githubLink, hostingLink=undefined, adminPassword} = req.body;
 
     projectMadeBy_Array = await findFrameWorks(projectMadeBy);
 
@@ -82,6 +83,7 @@ router.put('/projectCollection/:id', async(req, res)=>{
             projectName : projectName,
             projectDescription : projectDescription,
             projectMadeBy : projectMadeBy_Array,
+            thumbnailLink : thumbnailLink,
             imageLink : imageLink,
             videoLink : videoLink,
             githubLink : githubLink,

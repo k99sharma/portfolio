@@ -7,19 +7,20 @@
 
 <!-- main content -->
 <div class="container text-center" id="project-intro">
-    <h5>Project</h5>
+    <h2>Project Collection</h2>
     <br />
-    <h1>Project Intro</h1>
+    <h5>Here are a few design projects I've worked on recently. </h5>
+    <br />
 </div>
 
-<section class="container-fluid" id="projects-section">
+<section class="container" id="projects-section">
     <!-- all projects modals -->
     <div class="row" id="project-card-collection">
         <% for(let project of allProjects){ %>
-            <div class="col-12 col-md-4 p-4">
+            <div class="col-12 col-md-4 my-2">
                 
                 <button type="button" data-bs-toggle="modal" data-bs-target="#modal-<%= project._id %>">
-                    <img src="<%= project.imageLink %>" class="img-fluid" alt="<%= project.projectName %> Image">
+                    <img src="<%= project.thumbnailLink %>" class="img-fluid rounded-3" alt="<%= project.projectName %> Image">
                 </button>
 
                 <!-- Modal -->
@@ -34,19 +35,14 @@
                             <div class="modal-body text-white bg-dark">
                                 <div class="row">
                                     <div class="col-12 col-md-6">
-                                        <img src="<%= project.imageLink %>" class="img-fluid" alt="<%= project.projectName %> Image"> 
+                                        <div class="card p-0">
+                                            <img src="<%= project.imageLink %>" class="img-fluid" alt="<%= project.projectName %> Image"> 
+                                        </div>
                                     </div>
 
                                     <div class="col-12 col-md-6">
-                                        <div class="container mb-4">
+                                        <div class="container p-4">
                                             <%= project.projectDescription %>
-                                        </div>
-
-                                        <div class="container">
-                                            <p>Technology Stack</p>
-                                            <% for(let tech of project.projectMadeBy){ %>
-                                                <img src="/images/tech/<%= tech %>" class="img-fluid mx-1" col="20px" row="20px" alt="<%= tech %> Image">
-                                            <% } %>
                                         </div>
                                     </div>
                                 </div>

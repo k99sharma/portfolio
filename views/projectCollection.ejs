@@ -15,7 +15,7 @@
                 <!-- project card -->
                 <div class="card">
                     <div class="card text-center" id="project-details-card-<%= project._id %>">
-                        <img src="<%= project.imageLink %>" class="card-img-top" alt="project image">
+                        <img src="<%= project.thumbnailLink %>" class="card-img-top" alt="project image">
                         
                         <div class="card-body">
                         <small class="text-muted"><%= project.createdOn %></small>
@@ -57,6 +57,11 @@
                                                     <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name" value="<%= project.projectName %>" required>
                                                     <label for="projectName">Project Name<span class="redLabel">*</span></label>
                                                 </div>
+
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="thumbnailLink" name="thumbnailLink" placeholder="Thumbnail Link" value="<%= project.thumbnailLink %>" required>
+                                                    <label for="thumbnailLink">Thumbnail Link<span class="redLabel">*</span></label>
+                                                  </div>
             
                                                 <div class="form-floating mb-3">
                                                     <input type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Image Link" value="<%= project.imageLink %>" required>
