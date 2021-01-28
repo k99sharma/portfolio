@@ -3,6 +3,8 @@ const router = express.Router();
 
 const Project = require('../models/project');
 
+const findFrameWorks = require('../middlewares/findFrameWorks');
+
 // GET admin page
 router.get('/', (req, res)=>{
     res.locals.current_page = 'adminPage';
@@ -14,11 +16,16 @@ router.get('/', (req, res)=>{
 
 // POST new project entry
 router.post('/newProject', async (req, res)=>{
-    const {projectName, imageLink, videoLink, githubLink, hostingLink=undefined, adminPassword} = req.body;
+    const {projectName, projectDescription, projectMadeBy, imageLink, thumbnailLink, videoLink, githubLink, hostingLink=undefined, adminPassword} = req.body;
+
+    projectMadeBy_Array = await findFrameWorks(projectMadeBy);
 
     if(adminPassword == process.env.ADMIN_PASSWORD){
         const newProject = new Project({
             projectName : projectName,
+            projectDescription : projectDescription,
+            projectMadeBy : projectMadeBy_Array,
+            thumbnailLink : thumbnailLink,
             imageLink : imageLink,
             videoLink : videoLink,
             githubLink : githubLink,
@@ -67,15 +74,21 @@ router.get('/projectCollection', async (req, res)=>{
 // Edit Project
 router.put('/projectCollection/:id', async(req, res)=>{
     const { id } = req.params;
-    const {projectName, imageLink, videoLink, githubLink, hostingLink=undefined, adminPassword} = req.body;
+    const {projectName, projectDescription, projectMadeBy, imageLink, thumbnailLink, videoLink, githubLink, hostingLink=undefined, adminPassword} = req.body;
+
+    projectMadeBy_Array = await findFrameWorks(projectMadeBy);
 
     if(adminPassword == process.env.ADMIN_PASSWORD){
         await Project.findByIdAndUpdate(id , {
             projectName : projectName,
+            projectDescription : projectDescription,
+            projectMadeBy : projectMadeBy_Array,
+            thumbnailLink : thumbnailLink,
             imageLink : imageLink,
             videoLink : videoLink,
             githubLink : githubLink,
-            hostingLink : hostingLink 
+            hostingLink : hostingLink,
+            modifiedOn: Date.now()
         })
         .then(()=>{
             console.log('Project Edited successfully !');
@@ -109,6 +122,8 @@ router.delete('/projectCollection/:id', async (req, res)=>{
             res.redirect('/ghost_32/admin/projectCollection');
         })
 });
+
+
 
 
 module.exports = router;

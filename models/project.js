@@ -8,11 +8,19 @@ const projectSchema = new Schema({
         type: String, 
         required: true
     },
-    imageLink: {
+    projectDescription: {
         type: String,
         required: true
     },
-    videoLink : {
+    projectMadeBy: {
+        type: Array,
+        required: true
+    },
+    thumbnailLink: {
+        type: String,
+        required: true
+    },
+    imageLink: {
         type: String,
         required: true
     },
@@ -28,6 +36,7 @@ const projectSchema = new Schema({
 
 // adding plugin
 projectSchema.plugin(creationInfo);
+
 
 const Project = mongoose.model('Project', projectSchema);
 

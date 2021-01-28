@@ -2,13 +2,10 @@
     color: red;
 }
 
-.card-footer{
-    background-color: grey;
-}
-
-
-
-.card-body{
+#project-card-collection{
     background-color: black;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
+
 

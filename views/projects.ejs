@@ -6,47 +6,58 @@
 
 
 <!-- main content -->
-<section class="container-fluid" id="projects-section">
-    <!-- all projects card -->
-    <div class="row">
+<div class="container text-center" id="project-intro">
+    <h2>Project Collection</h2>
+    <br />
+    <h5>Here are a few design projects I've worked on recently. </h5>
+    <br />
+</div>
+
+<section class="container" id="projects-section">
+    <!-- all projects modals -->
+    <div class="row" id="project-card-collection">
         <% for(let project of allProjects){ %>
-            <div class="col-12 col-md-6 p-4">
-                <!-- project card -->
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                      <a class="nav-link active" id="project-details-tab" data-bs-toggle="tab" href="#project-details-<%= project._id %>" role="tab" aria-controls="project-details" aria-selected="true">Project De</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                      <a class="nav-link" id="project-video-tab" data-bs-toggle="tab" href="#project-video-<%= project._id %>" role="tab" aria-controls="profile" aria-selected="false">Video Clip</a>
-                    </li>
-                </ul>
-
-                <div class="tab-content" id="projectContent">
-                    <div class="tab-pane fade show active" id="project-details-<%= project._id %>" role="tabpanel" aria-labelledby="project-details-tab">
-                        <div class="card text-center" id="project-details-card-<%= project._id %>">
-                            <img src="<%= project.imageLink %>" class="card-img-top" alt="project image">
-                                    
-                            <div class="card-body">
-                                <small class="text-muted"><%= project.createdOn %></small>
-                                <br /><br />
-                                <h5 class="card-text"><%= project.projectName %></h5>
-                            </div>
+            <div class="col-12 col-md-4 my-2">
                 
-                            <div class="card-footer">
-                                <a href="<%= project.githubLink %>" class="btn btn-primary m-2"><i class="fab fa-github"></i></a>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#modal-<%= project._id %>">
+                    <img src="<%= project.thumbnailLink %>" class="img-fluid rounded-3" alt="<%= project.projectName %> Image">
+                </button>
 
-                                <a href="<%= project.hostingLink %>" class="btn btn-success m-2"><i class="fas fa-rocket"></i></a>
+                <!-- Modal -->
+                <div class="modal fade" id="modal-<%= project._id %>" tabindex="-1" aria-labelledby="modal-<%= project.projectName %>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content row">
+                            <div class="modal-header text-white bg-dark">
+                                <h5 class="modal-title"><%= project.projectName %></h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="tab-pane fade" id="project-video-<%= project._id %>" role="tabpanel" aria-labelledby="project-video">
-                        <div class="card" id="project-video-card-<%= project._id %>">
-                            <h1>Video</h1>
+                            <div class="modal-body text-white bg-dark">
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <div class="card p-0">
+                                            <img src="<%= project.imageLink %>" class="img-fluid" alt="<%= project.projectName %> Image"> 
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="container p-4">
+                                            <%= project.projectDescription %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer text-white bg-dark">
+                                <a type="button" href="<%= project.githubLink %>" class="btn btn-success"><i class="fab fa-github"></i></a>
+                                <% if(project.hostingLink){ %>
+                                    <a type="button" href="<%= project.hostingLink %>" class="btn btn-primary"><i class="fas fa-rocket"></i></a>
+                                <% } %>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- projects ends here -->
+                <!-- project modal ends here -->
             </div>
         <% } %>
     </div>
