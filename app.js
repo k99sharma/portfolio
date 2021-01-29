@@ -7,7 +7,8 @@ var mongoose = require('mongoose');
 var methodOverride = require('method-override');
 var mongoSanitize = require('express-mongo-sanitize');
 
-require('dotenv').config();
+if(process.env.NODE_ENV !== 'production')
+  require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var formRouter = require('./routes/forms_submission');
