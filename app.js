@@ -5,8 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var methodOverride = require('method-override');
+var mongoSanitize = require('express-mongo-sanitize');
 
-require('dotenv').config();
+if(process.env.NODE_ENV !== 'production')
+  require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var formRouter = require('./routes/forms_submission');
@@ -24,6 +26,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
+app.use(mongoSanitize());
+
 
 // database connection setup
 const dbURI = 'mongodb://localhost: 270181/portfolio';
