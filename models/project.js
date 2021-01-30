@@ -16,13 +16,25 @@ const projectSchema = new Schema({
         type: Array,
         required: true
     },
-    thumbnailLink: {
-        type: String,
-        required: true
+    thumbnail: {
+        url: {
+            type: String,
+            required: true
+        },
+        name: {
+            type: String,
+            required: true
+        }
     },
-    imageLink: {
-        type: String,
-        required: true
+    image: {
+        url: {
+            type: String,
+            required: true
+        },
+        name: {
+            type: String,
+            required: true
+        }
     },
     githubLink: {
         type: String,

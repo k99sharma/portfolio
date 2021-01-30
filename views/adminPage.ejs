@@ -51,7 +51,7 @@
 
                               <div class="modal-body" id="projectModalBody">
                                 <!-- new project form-->
-                                <form action="/ghost_32/admin/newProject" method="POST" autocomplete="off">
+                                <form action="/ghost_32/admin/newProject" method="POST" autocomplete="off" enctype="multipart/form-data">
                                   <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name" required>
                                     <label for="projectName">Project Name<span class="redLabel">*</span></label>
@@ -67,14 +67,14 @@
                                     <label for="projectMadeBy">Project MadeBy<span class="redLabel">*</span></label>
                                   </div>
 
-                                  <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="thumbnailLink" name="thumbnailLink" placeholder="Thumbnail Link" required>
-                                    <label for="thumbnailLink">Thumbnail Link<span class="redLabel">*</span></label>
+                                  <div class="mb-3">
+                                    <label for="thumbnail" class="form-label">Thumbnail Image<span class="redLabel">*</span></label>
+                                    <input class="form-control" type="file" id="thumbnail" name="thumbnail" required>
                                   </div>
 
-                                  <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Image Link" required>
-                                    <label for="imageLink">Image Link<span class="redLabel">*</span></label>
+                                  <div class="mb-3">
+                                    <label for="projectImage" class="form-label">Project Image<span class="redLabel">*</span></label>
+                                    <input class="form-control" type="file" id="projectImage" name="projectImage" required>
                                   </div>
 
                                   <div class="form-floating mb-3">
@@ -92,9 +92,12 @@
                                     <label for="adminPassword">Admin Password<span class="redLabel">*</span></label>
                                   </div>
     
-                                  <div class="modal-footer">
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                  <div class="modal-footer" id="addProjectButtonDiv">
+                                    <button type="submit" class="btn btn-success" id="addProjectButton">Add</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="addProjectClose">Close</button>
+                                    <div class="spinner-border text-primary d-none" id="addProject-spinner" role="status">
+                                      <span class="visually-hidden">Loading...</span>
+                                    </div>
                                   </div>
                                 </form>
                                 <!-- new project form ends here -->
@@ -134,7 +137,7 @@
     </div>
 </section>
 
-
+<script src="/javascripts/adminPage.js"></script>
 
 <!-- footer -->
 <%- include('partials/footer.ejs') %>

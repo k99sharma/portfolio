@@ -15,7 +15,7 @@
                 <!-- project card -->
                 <div class="card">
                     <div class="card text-center" id="project-details-card-<%= project._id %>">
-                        <img src="<%= project.thumbnailLink %>" class="card-img-top" alt="project image">
+                        <img src="<%= project.thumbnail.url %>" class="card-img-top" alt="project image">
                         
                         <div class="card-body">
                         <small class="text-muted"><%= project.createdOn %></small>
@@ -52,22 +52,22 @@
         
                                         <div class="modal-body" id="projectModalBody">
                                             <!-- new project form-->
-                                            <form action="/ghost_32/admin/projectCollection/<%= project._id %>?_method=PUT" method="POST" autocomplete="off">
+                                            <form action="/ghost_32/admin/projectCollection/<%= project._id %>?_method=PUT" method="POST" autocomplete="off" enctype="multipart/form-data">
                                                 <div class="form-floating mb-3">
                                                     <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name" value="<%= project.projectName %>" required>
                                                     <label for="projectName">Project Name<span class="redLabel">*</span></label>
                                                 </div>
 
                                                 <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="thumbnailLink" name="thumbnailLink" placeholder="Thumbnail Link" value="<%= project.thumbnailLink %>" required>
-                                                    <label for="thumbnailLink">Thumbnail Link<span class="redLabel">*</span></label>
-                                                  </div>
-            
-                                                <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="imageLink" name="imageLink" placeholder="Image Link" value="<%= project.imageLink %>" required>
-                                                    <label for="imageLink">Image Link<span class="redLabel">*</span></label>
+                                                    <textarea class="form-control" placeholder="Project Description" id="projectDescription" name="projectDescription"><%= project.projectDescription %></textarea>
+                                                    <label for="projectDescription">Project Description<span class="redLabel">*</span></label>
                                                 </div>
-            
+                
+                                                <div class="form-floating mb-3">
+                                                    <textarea class="form-control" placeholder="Project MadeBy" id="projectMadeBy" name="projectMadeBy"><%= project.projectMadeBy %></textarea>
+                                                    <label for="projectMadeBy">Project MadeBy<span class="redLabel">*</span></label>
+                                                </div>
+
                                                 <div class="form-floating mb-3">
                                                     <input type="text" class="form-control" id="githubLink" name="githubLink" placeholder="Github Link" value="<%= project.githubLink %>" required>
                                                     <label for="githubLink">Github Link<span class="redLabel">*</span></label>
@@ -98,10 +98,39 @@
                             </div>
 
                             <div class="col-auto col-md-6">
-                                <!-- delete project -->
-                                <form action="/ghost_32/admin/projectCollection/<%= project._id %>?_method=DELETE" method="POST">
-                                    <button class="btn btn-danger">Delete</button>
-                                </form>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteOption">
+                                    Delete
+                                </button>
+                                
+                                <!-- Delete Modal -->
+                                <div class="modal fade" id="deleteOption" tabindex="-1" aria-labelledby="deleteOption" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete Project</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete the project?</p>
+
+                                                <form action="/ghost_32/admin/projectCollection/<%= project._id %>?_method=DELETE" method="POST">
+                                                    <div class="form-floating" >
+                                                        <input type="password" class="form-control" name="deleteConfirmPassword" id="deleteConfirmPassword" placeholder="Password">
+                                                        <label for="deleteConfirmPassword">Confirm Password</label>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">No</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Delete Modal ends here -->
                             </div>
 
                         </div>
@@ -115,6 +144,8 @@
     </div>
 </section>
 <!-- main content ends here -->
+<br /><br /><br />
+
 
 <!-- footer -->
 <%- include('partials/footer.ejs') %>

@@ -1,7 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+// multer and cloudinary
+const multer = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
+
+
 const Project = require('../models/project');
+const deleteImage = require('../middlewares/deleteImage');
 
 const findFrameWorks = require('../middlewares/findFrameWorks');
 
@@ -15,9 +22,13 @@ router.get('/', (req, res)=>{
 
 
 // POST new project entry
-router.post('/newProject', async (req, res)=>{
-    const {projectName, projectDescription, projectMadeBy, imageLink, thumbnailLink, videoLink, githubLink, hostingLink=undefined, adminPassword} = req.body;
+const newProjectImageUpload = upload.fields([{ name: 'thumbnail', maxCount: 1 }, { name: 'projectImage', maxCount: 1}]);
 
+router.post('/newProject', newProjectImageUpload, async (req, res)=>{
+    const {projectName, projectDescription, projectMadeBy, githubLink, hostingLink=undefined, adminPassword} = req.body;
+ 
+    console.log(req.body);
+   
     projectMadeBy_Array = await findFrameWorks(projectMadeBy);
 
     if(adminPassword == process.env.ADMIN_PASSWORD){
@@ -25,14 +36,17 @@ router.post('/newProject', async (req, res)=>{
             projectName : projectName,
             projectDescription : projectDescription,
             projectMadeBy : projectMadeBy_Array,
-            thumbnailLink : thumbnailLink,
-            imageLink : imageLink,
-            videoLink : videoLink,
+            thumbnail : {
+                url: req.files.thumbnail[0].path,
+                name: req.files.thumbnail[0].filename
+            },
+            image : {
+                url: req.files.projectImage[0].path,
+                name: req.files.projectImage[0].filename
+            },
             githubLink : githubLink,
             hostingLink : hostingLink    
         });
-
-        console.log(newProject);
 
         await newProject.save()
             .then(()=>{
@@ -70,11 +84,10 @@ router.get('/projectCollection', async (req, res)=>{
 });
 
 
-
 // Edit Project
 router.put('/projectCollection/:id', async(req, res)=>{
     const { id } = req.params;
-    const {projectName, projectDescription, projectMadeBy, imageLink, thumbnailLink, videoLink, githubLink, hostingLink=undefined, adminPassword} = req.body;
+    const {projectName, projectDescription, projectMadeBy, githubLink, hostingLink=undefined, adminPassword} = req.body;
 
     projectMadeBy_Array = await findFrameWorks(projectMadeBy);
 
@@ -83,9 +96,6 @@ router.put('/projectCollection/:id', async(req, res)=>{
             projectName : projectName,
             projectDescription : projectDescription,
             projectMadeBy : projectMadeBy_Array,
-            thumbnailLink : thumbnailLink,
-            imageLink : imageLink,
-            videoLink : videoLink,
             githubLink : githubLink,
             hostingLink : hostingLink,
             modifiedOn: Date.now()
@@ -108,19 +118,48 @@ router.put('/projectCollection/:id', async(req, res)=>{
 });
 
 
+
+
 // Delete project 
 router.delete('/projectCollection/:id', async (req, res)=>{
     const {id} = req.params;
+    const { deleteConfirmPassword } = req.body;
 
-    await Project.findByIdAndRemove(id)
-        .then(()=>{
-            console.log('Deleted Project Successfully !');
+    if(deleteConfirmPassword == process.env.ADMIN_PASSWORD){
+        // delete photos from cloudinary database
+        const project = await Project.findOne({'_id': id});
+
+        if(project){
+            const thumbnail = project.thumbnail.name;
+            const projectImage = project.image.name;
+
+            await deleteImage(thumbnail, projectImage)
+                .then(async ()=>{
+                    await Project.findByIdAndRemove(id)
+                        .then(()=>{
+                            console.log('Deleted Project Successfully !');
+                            res.redirect('/ghost_32/admin/projectCollection');
+                        })
+                        .catch(err => {
+                            console.log('Cannot delete Project! Error: ' + err);
+                            res.redirect('/ghost_32/admin/projectCollection');
+                        })       
+                })
+                .catch((err)=>{
+                    console.log('Cannot delete! Error: ' + err);
+                    res.redirect('/ghost_32/admin/projectCollection');
+                })
+        }
+        else{
+            console.log('Cannot find data! Error: ' + err);
             res.redirect('/ghost_32/admin/projectCollection');
-        })
-        .catch(err => {
-            console.log('Cannot delete Project! Error: ' + err);
-            res.redirect('/ghost_32/admin/projectCollection');
-        })
+        }
+    }
+    else{
+        console.log('Wrong Password!');
+        res.redirect('/ghost_32/admin/projectCollection');
+    }
+
 });
 
 
